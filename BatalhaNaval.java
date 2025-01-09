@@ -6,12 +6,9 @@ public class BatalhaNaval{
 
         char[][] novocenario = gerarCenarioAleatorio();
 
-        for (int i = 0; i < novocenario.length; i++) {
-            for (int j = 0; j < novocenario[i].length; j++) {
-                System.out.print(novocenario[i][j] + " ");
-            }
-            System.out.println(); // Nova linha após cada linha da matriz
-        }
+        novocenario[2][2] = 'O';
+
+        exibirCenario(novocenario, true);
     }
         
 
@@ -99,19 +96,54 @@ public class BatalhaNaval{
 
     }
 
-    /*public static void exibirCenario(char[][] cenario, boolean ocultarEmbarcacoes){
+    public static void exibirCenario(char[][] cenario, boolean ocultarEmbarcacoes){
+        int contador = 1;
+        for (int i = 0; i < cenario.length; i++) {
+            for (int j = 0; j < cenario[i].length; j++) {
+                if(ocultarEmbarcacoes && (cenario[i][j] == '0' || cenario[i][j] == '1' || cenario[i][j] == '2' || cenario[i][j] == '3' || cenario[i][j] == '4' || cenario[i][j] == '5')){
+                    System.out.printf("%3s ",String.valueOf(contador) + " ");
+                } else{
+                    System.out.printf("%3s ", cenario[i][j] + " ");
+                }
+                contador++;
+            }
+            System.out.println();
+        }
 
     }
+
+
+    
+
 
     public static boolean realizarAtaque(char[][] cenarioAdversario, int linha, int coluna){
+        if(cenarioAdversario[linha][coluna]!='0'){
+
+            System.out.println("Bomba");
+            return true;
+        } else{
+            System.out.println("Agua");
+            return false;
+        }
 
     }
 
-    public static boolean verificarEmbarcacaoAfundada(char[][] cenario, int tamanhoEmbarcacao){
+    
 
-    }
+    
 
     public static void atualizarCenario(char[][] cenario, int linha, int coluna, boolean acerto){
+        if(acerto){
+            cenario[linha][coluna] = 'X';
+        } else{
+            cenario[linha][coluna] = 'O';
+        }
+
+    }
+
+    /*
+
+    public static boolean verificarEmbarcacaoAfundada(char[][] cenario, int tamanhoEmbarcacao){
 
     }
 
