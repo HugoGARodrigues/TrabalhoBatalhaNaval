@@ -141,12 +141,18 @@ public class BatalhaNaval{
 
     }
 
-    /*
+    
 
-    public static boolean verificarEmbarcacaoAfundada(char[][] cenario, int tamanhoEmbarcacao){
+    public static boolean verificarEmbarcacaoAfundada(char[][] cenario, int posicao){
+
+        return true;
 
     }
 
+    public static int tradutor(int posicao) {
+        
+    }
+/* 
     public static boolean verificarAtaqueRepetido(boolean[][] ataques, int linha, int coluna){
 
     }
