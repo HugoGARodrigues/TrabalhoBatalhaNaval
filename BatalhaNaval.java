@@ -1,4 +1,7 @@
 
+import java.util.Scanner;
+
+
 
 public class BatalhaNaval{
 
@@ -9,6 +12,12 @@ public class BatalhaNaval{
         novocenario[2][2] = 'O';
 
         exibirCenario(novocenario, true);
+        Scanner scanner = new Scanner(System.in);
+
+        int valorDeEntrada = scanner.nextInt();
+
+        System.out.printf("(%d,%d)", tradutorLinha(valorDeEntrada), tradutorColuna(valorDeEntrada));
+        System.out.println(contarEmbarcacoesAfundadas(novocenario));
     }
         
 
@@ -32,7 +41,7 @@ public class BatalhaNaval{
             System.out.println(randomint1);
             System.out.println(randomint2);
 
-            boolean testeposicao = varrerposicao(randomint1, randomint2, cenario, contador+1);
+            boolean testeposicao = varrerPosicao(randomint1, randomint2, cenario, contador+1);
             if(testeposicao){
                 System.out.println(randomint1);
                 System.out.println(randomint2);
@@ -59,7 +68,7 @@ public class BatalhaNaval{
 
     }
 
-    public static boolean varrerposicao(int posicaox, int posicaoy, char[][] cenario, int tamanho){
+    public static boolean varrerPosicao(int posicaox, int posicaoy, char[][] cenario, int tamanho){
         boolean valorfinal = false;
         int auxiliaFinal = 0;
         
@@ -132,51 +141,150 @@ public class BatalhaNaval{
 
     
 
-    public static void atualizarCenario(char[][] cenario, int linha, int coluna, boolean acerto){
+    public static void atualizarCenario(char[][] cenario, int posicao, boolean acerto){
+        
+        
         if(acerto){
-            cenario[linha][coluna] = 'X';
+            cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] = 'X';
         } else{
-            cenario[linha][coluna] = 'O';
+            cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] = 'O';
         }
 
     }
 
     
 
-    public static boolean verificarEmbarcacaoAfundada(char[][] cenario, int posicao){
+    public static boolean verificarEmbarcacaoAfundada(char[][] cenario, int posicao, char tamanho){
 
         return true;
 
     }
 
-    public static int tradutor(int posicao) {
+    
+    public static int tradutorLinha(int posicao) {
+
+        int valorFinal = 0;
+        double auxiliar = (double) posicao;
+        
+        if(posicao <= 10){
+
+            valorFinal = 0;
+
+        }else if(posicao > 10 && posicao < 100){
+            if(posicao%10 == 0){
+                valorFinal = posicao / 10 - 1;
+            }else{
+
+                
+                auxiliar = posicao / 10;
+                valorFinal = (int) Math.floor(auxiliar);
+
+            }
+            
+        }else{
+            valorFinal = 9;
+        }
+
+
+        return valorFinal;
+        
         
     }
-/* 
-    public static boolean verificarAtaqueRepetido(boolean[][] ataques, int linha, int coluna){
+
+    public static int tradutorColuna(int posicao) {
+
+        int valorFinal = 0;
+        if(posicao <= 10){
+            valorFinal = posicao - 1;
+
+        }else if(posicao > 10 && posicao <= 100){
+            if(posicao%10 == 0){
+                valorFinal = 9;
+            } else{
+                valorFinal = posicao % 10 - 1;
+            }
+        }
+        
+        return valorFinal;
+        
+    }
+
+    
+ 
+    public static boolean verificarAtaqueRepetido(char[][] cenario, int posicao){
+
+        if(cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] == 'X' || cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] == 'O'){
+            return true;
+        }else{
+            return false;
+        }
 
     }
+
+    
 
     public static int contarEmbarcacoesAfundadas(char[][] cenario){
 
+        int contadorAfundadas = 0;
+        double contadorAuxiliar1 = 0;
+        double contadorAuxiliar2 = 0;
+        double contadorAuxiliar3 = 0;
+        double contadorAuxiliar4 = 0;
+        double contadorAuxiliar5 = 0;
+        for(int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                
+                if(cenario[i][j] == '1'){
+                    contadorAuxiliar1++;
+                }else if(cenario[i][j] == '2'){
+                    contadorAuxiliar2++;
+                }else if(cenario[i][j] == '3'){
+                    contadorAuxiliar3++;
+                }else if(cenario[i][j] == '4'){
+                    contadorAuxiliar4++;
+                }else if(cenario[i][j] == '5'){
+                    contadorAuxiliar5++;
+                }
+            
+            
+            }
+        }
+
+        
+        if(contadorAuxiliar1 == 0){
+            contadorAfundadas++;
+        }else if(contadorAuxiliar2 == 0){
+            contadorAfundadas++;
+        }else if(contadorAuxiliar3 == 0){
+            contadorAfundadas++;
+        } else if(contadorAuxiliar4 == 0){
+            contadorAfundadas++;
+        } else if(contadorAuxiliar5 == 0){
+            contadorAfundadas++;
+        }
+
+        return contadorAfundadas;
+
     }
 
-    public static boolean verificarVitoria(char[][] cenario){
+    
+    public static boolean verificarVitoria(int numeroAfundadas){
+
+        if (numeroAfundadas == 5){
+            return true;
+        }
+        return false;
 
     }
 
     
 
-    public static char[][] facilitadorTradutor(int posicao){
-
-    }
     
 
 }
 
 
 
-*/
 
 
 
@@ -185,5 +293,5 @@ public class BatalhaNaval{
     
 
     
-}
+
 
