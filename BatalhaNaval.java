@@ -7,19 +7,129 @@ public class BatalhaNaval{
 
     public static void main(String[] args){
 
-        char[][] novocenario = gerarCenarioAleatorio();
-
-        novocenario[2][2] = 'O';
-
-        exibirCenario(novocenario, true);
         Scanner scanner = new Scanner(System.in);
 
-        int valorDeEntrada = scanner.nextInt();
+        int running = 1;
+        
 
-        System.out.printf("(%d,%d)", tradutorLinha(valorDeEntrada), tradutorColuna(valorDeEntrada));
-        System.out.println(contarEmbarcacoesAfundadas(novocenario));
+        while (running == 1){
+            boolean jogoTerminado = false;
+            System.out.println("1 - Jogar");
+            System.out.println("2 - Sair");
+            int valorDeEntrada = scanner.nextInt();
+            if (valorDeEntrada == 1){
+                System.out.println("Este jogo de batalha naval é para 2 jogares, os tiros serao alternados e iniciaram com os tiros do primeiro jogador");
+                System.out.println("O campo de batalhas terá números para indicar as posiçoes para o ataque");
+                System.out.println("Vao haver 5 embarcações de tamanho de 1 a 5, ganha quem afundar todas primeiro");
+                char[][] cenarioJogador1 = gerarCenarioAleatorio();
+                char[][] cenarioJogador2 = gerarCenarioAleatorio();
+
+                while(true){
+
+
+                    System.out.println("-------------------------------------------------------------------------------------------------");
+                   
+                    Jogador1(cenarioJogador2);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioJogador2))){
+                        System.out.println("Jogador 1 ganhou!");
+                        break;
+                    }
+
+                    System.out.println("------------------------------------------------------------------------------------------------");
+                    
+                    Jogador2(cenarioJogador1);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioJogador1))){
+                        
+                        System.out.println("Jogador 2 ganhou!");
+                        break;
+                    }
+
+                    
+
+            
+                
+            
+            
+                }
+            }else if(valorDeEntrada == 2){
+                running = 2;
+
+            }
+        }
     }
         
+
+    public static void Jogador1(char[][] cenarioJogador2) {
+        Scanner scanner = new Scanner(System.in);
+        boolean running = false;
+        char auxiliar;
+
+       
+
+        while(running == false){
+
+            System.out.println("Jogador 1");
+            System.out.println("Veja o campo do seu inimigo:");
+            exibirCenario(cenarioJogador2, true);
+            System.out.println("Jogador 1 indique a posicao que voce deseja atacar");
+            int ataqueJogador1 = scanner.nextInt();
+
+            if(verificarAtaqueRepetido(cenarioJogador2, ataqueJogador1) == true){
+                System.out.println("Ataque já realizado nessa posicao. Tente outra.");
+                running = false;
+            }else{
+                boolean acertou = realizarAtaque(cenarioJogador2, ataqueJogador1);
+                if(acertou == true){
+                    auxiliar = cenarioJogador2[tradutorLinha(ataqueJogador1)][tradutorColuna(ataqueJogador1)];
+                    atualizarCenario(cenarioJogador2, ataqueJogador1, acertou);
+                    verificarEmbarcacaoAfundada(cenarioJogador2, auxiliar);
+                    running = true;
+                }else{
+                    atualizarCenario(cenarioJogador2, ataqueJogador1, acertou);
+                    running = true;
+                }
+            }
+            
+        }
+        
+
+        
+
+    }
+
+    public static void Jogador2(char[][] cenarioJogador1) {
+        Scanner scanner = new Scanner(System.in);
+        boolean running = false;
+        char auxiliar;
+
+        while(running == false){
+            System.out.println("Jogador 2");
+            System.out.println("Veja o campo do seu inimigo:");
+            exibirCenario(cenarioJogador1, true);
+            System.out.println("Jogador 2 indique a posicao que voce deseja atacar");
+            int ataqueJogador2 = scanner.nextInt();
+
+            if(verificarAtaqueRepetido(cenarioJogador1, ataqueJogador2) == true){
+                System.out.println("Ataque já realizado nessa posicao. Tente outra.");
+                running = false;
+            }else{
+                boolean acertou = realizarAtaque(cenarioJogador1, ataqueJogador2);
+                if(acertou == true){
+                    auxiliar = cenarioJogador1[tradutorLinha(ataqueJogador2)][tradutorColuna(ataqueJogador2)];
+                    atualizarCenario(cenarioJogador1, ataqueJogador2, acertou);
+                    verificarEmbarcacaoAfundada(cenarioJogador1, auxiliar);
+                    running = true;
+                }else{
+                    atualizarCenario(cenarioJogador1, ataqueJogador2, acertou);
+                    running = true;
+            }
+            }
+            
+        }
+
+        
+
+    }
 
 
     public static char[][] gerarCenarioAleatorio(){
@@ -38,13 +148,10 @@ public class BatalhaNaval{
 
             int randomint1= gerandoNumeroAleatorioInteiro(0,9);
             int randomint2= gerandoNumeroAleatorioInteiro(0,9);
-            System.out.println(randomint1);
-            System.out.println(randomint2);
 
             boolean testeposicao = varrerPosicao(randomint1, randomint2, cenario, contador+1);
             if(testeposicao){
-                System.out.println(randomint1);
-                System.out.println(randomint2);
+                
                 //Embarcação horizontal = 0  vertical = 1
                 int eixo = gerandoNumeroAleatorioInteiro(0, 1);
                 if(eixo == 0){
@@ -76,7 +183,7 @@ public class BatalhaNaval{
             auxiliaFinal++;
         }else{
             for(int i = 0; i < tamanho; i++){
-                if(cenario[posicaox][posicaoy+i]!='0' && cenario[posicaox + i][posicaoy]!='0'){
+                if(cenario[posicaox][posicaoy+i]!='0' || cenario[posicaox + i][posicaoy]!='0'){
                     auxiliaFinal++;
                 }
 
@@ -125,8 +232,8 @@ public class BatalhaNaval{
     
 
 
-    public static boolean realizarAtaque(char[][] cenarioAdversario, int linha, int coluna){
-        if(cenarioAdversario[linha][coluna]!='0'){
+    public static boolean realizarAtaque(char[][] cenarioAdversario, int posicao){
+        if(cenarioAdversario[tradutorLinha(posicao)][tradutorColuna(posicao)] !='0'){
 
             System.out.println("Bomba");
             return true;
@@ -147,16 +254,84 @@ public class BatalhaNaval{
         if(acerto){
             cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] = 'X';
         } else{
-            cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] = 'O';
+            cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] = '~';
         }
 
     }
 
     
 
-    public static boolean verificarEmbarcacaoAfundada(char[][] cenario, int posicao, char tamanho){
+    public static void verificarEmbarcacaoAfundada(char[][] cenario, char caracter){
 
-        return true;
+            int contador = 0;
+            
+
+            if(caracter == '1'){
+                System.out.println("Você a afundou a embarcacao de tamanho 1");
+                
+
+            }else if(caracter == '2'){
+                for(int i = 0; i < 10; i++){
+                    for (int j = 0; j < 10; j++){
+                        if(cenario[i][j] == '2'){
+                            contador++;
+                        }
+
+                    }
+                }
+                
+                if(contador == 0){
+                    System.out.println("Você a afundou a embarcacao de tamanho 2");
+                }
+            }else if(caracter == '3'){
+                for(int i = 0; i < 10; i++){
+                    for (int j = 0; j < 10; j++){
+                        if(cenario[i][j] == '3'){
+                            contador++;
+                        }
+
+                    }
+                }
+                
+                if(contador == 0){
+                    System.out.println("Você a afundou a embarcacao de tamanho 3");
+                }
+
+            }else if(caracter == '4'){
+                for(int i = 0; i < 10; i++){
+                    for (int j = 0; j < 10; j++){
+                        if(cenario[i][j] == '4'){
+                            contador++;
+                        }
+
+                    }
+                }
+                
+                if(contador == 0){
+                    System.out.println("Você a afundou a embarcacao de tamanho 4");
+                }
+
+            }else if(caracter == '5'){
+                for(int i = 0; i < 10; i++){
+                    for (int j = 0; j < 10; j++){
+                        if(cenario[i][j] == '5'){
+                            contador++;
+                        }
+
+                    }
+                }
+                
+                if(contador == 0){
+                    System.out.println("Você a afundou a embarcacao de tamanho 5");
+        
+                }
+
+            }else{
+                System.out.println("Você ainda não afundou essa embarcação");
+            }
+
+            
+        
 
     }
 
@@ -213,7 +388,7 @@ public class BatalhaNaval{
  
     public static boolean verificarAtaqueRepetido(char[][] cenario, int posicao){
 
-        if(cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] == 'X' || cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] == 'O'){
+        if(cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] == 'X' || cenario[tradutorLinha(posicao)][tradutorColuna(posicao)] == '~'){
             return true;
         }else{
             return false;
@@ -251,16 +426,8 @@ public class BatalhaNaval{
         }
 
         
-        if(contadorAuxiliar1 == 0){
-            contadorAfundadas++;
-        }else if(contadorAuxiliar2 == 0){
-            contadorAfundadas++;
-        }else if(contadorAuxiliar3 == 0){
-            contadorAfundadas++;
-        } else if(contadorAuxiliar4 == 0){
-            contadorAfundadas++;
-        } else if(contadorAuxiliar5 == 0){
-            contadorAfundadas++;
+        if(contadorAuxiliar1 == 0 && contadorAuxiliar2 == 0 && contadorAuxiliar3 == 0 && contadorAuxiliar4 == 0 && contadorAuxiliar5 == 0){
+            contadorAfundadas += 5;
         }
 
         return contadorAfundadas;
