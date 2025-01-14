@@ -202,6 +202,11 @@ public class BatalhaNaval{
             System.out.printf("Jogador %d indique a posicao que voce deseja atacar\n", numeroDoJogador);
             int ataqueJogador = scanner.nextInt();
 
+            while(ataqueJogador <=0 || ataqueJogador > 100){
+                System.out.println("Posicao invalida. Tente novamente.");
+                ataqueJogador = scanner.nextInt();
+            }
+
             if(verificarAtaqueRepetido(cenarioAtacar, ataqueJogador) == true){
                 System.out.println("Ataque já realizado nessa posicao. Tente outra.");
                 running = false;
