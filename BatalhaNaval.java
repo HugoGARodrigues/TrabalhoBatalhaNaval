@@ -255,7 +255,7 @@ public class BatalhaNaval{
 
             System.out.printf("Jogador %d\n", numeroDoJogador);
             System.out.println("Veja o campo do seu inimigo:");
-            exibirCenario(cenarioAtacar, false);
+            exibirCenario(cenarioAtacar, true);
             System.out.printf("Jogador %d indique a posicao que voce deseja atacar\n", numeroDoJogador);
             int ataqueJogador = scanner.nextInt();
 
