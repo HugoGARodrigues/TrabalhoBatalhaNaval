@@ -1,5 +1,5 @@
 
-//adicionar mostrar tabelas finais
+
 
 import java.util.Scanner;
 
@@ -15,7 +15,6 @@ public class BatalhaNaval{
         
 
         while (running == 1){
-            boolean jogoTerminado = false;
             System.out.println("Bem vindo ao jogo Batalha Naval, escolha o que você quer fazer");
             System.out.println("1 - Jogar");
             System.out.println("2 - Sair");
@@ -67,6 +66,7 @@ public class BatalhaNaval{
                     Jogando(cenarioAtaqueJogador1, 1);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador1))){
                         System.out.println("Jogador 1 ganhou!");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
                         break;
                     }
                 }
@@ -87,6 +87,10 @@ public class BatalhaNaval{
                     Jogando(cenarioAtaqueJogador1, 1);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador1))){
                         System.out.println("Jogador 1 ganhou!");
+                        System.out.println("Cenario final Jogador 1");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        System.out.println("Cenario final Jogador 2");
+                        exibirCenarioFinal(cenarioAtaqueJogador2);
                         break;
                     }
 
@@ -95,6 +99,10 @@ public class BatalhaNaval{
                     Jogando(cenarioAtaqueJogador2, 2);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador2))){
                         System.out.println("Jogador 2 ganhou!");
+                        System.out.println("Cenario final Jogador 1");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        System.out.println("Cenario final Jogador 2");
+                        exibirCenarioFinal(cenarioAtaqueJogador2);
                         break;
                     }
                 }
@@ -115,6 +123,12 @@ public class BatalhaNaval{
                     Jogando(cenarioAtaqueJogador1, 1);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador1))){
                         System.out.println("Jogador 1 ganhou!");
+                        System.out.println("Cenario final Jogador 1");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        System.out.println("Cenario final Jogador 2");
+                        exibirCenarioFinal(cenarioAtaqueJogador2);
+                        System.out.println("Cenario final Jogador 3");
+                        exibirCenarioFinal(cenarioAtaqueJogador3);
                         break;
                     }
 
@@ -123,6 +137,12 @@ public class BatalhaNaval{
                     Jogando(cenarioAtaqueJogador2, 2);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador2))){
                         System.out.println("Jogador 2 ganhou!");
+                        System.out.println("Cenario final Jogador 1");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        System.out.println("Cenario final Jogador 2");
+                        exibirCenarioFinal(cenarioAtaqueJogador2);
+                        System.out.println("Cenario final Jogador 3");
+                        exibirCenarioFinal(cenarioAtaqueJogador3);
                         break;
                     }
 
@@ -130,6 +150,12 @@ public class BatalhaNaval{
                     
                     Jogando(cenarioAtaqueJogador3, 3);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador3))){
+                        System.out.println("Cenario final Jogador 1");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        System.out.println("Cenario final Jogador 2");
+                        exibirCenarioFinal(cenarioAtaqueJogador2);
+                        System.out.println("Cenario final Jogador 3");
+                        exibirCenarioFinal(cenarioAtaqueJogador3);
                         System.out.println("Jogador 3 ganhou!");
                         break;
                     }
@@ -153,6 +179,14 @@ public class BatalhaNaval{
                     Jogando(cenarioAtaqueJogador1, 1);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador1))){
                         System.out.println("Jogador 1 ganhou!");
+                        System.out.println("Cenario final Jogador 1");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        System.out.println("Cenario final Jogador 2");
+                        exibirCenarioFinal(cenarioAtaqueJogador2);
+                        System.out.println("Cenario final Jogador 3");
+                        exibirCenarioFinal(cenarioAtaqueJogador3);
+                        System.out.println("Cenario final Jogador 4");
+                        exibirCenarioFinal(cenarioAtaqueJogador4);
                         break;
                     }
 
@@ -161,6 +195,14 @@ public class BatalhaNaval{
                     Jogando(cenarioAtaqueJogador2, 2);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador2))){
                         System.out.println("Jogador 2 ganhou!");
+                        System.out.println("Cenario final Jogador 1");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        System.out.println("Cenario final Jogador 2");
+                        exibirCenarioFinal(cenarioAtaqueJogador2);
+                        System.out.println("Cenario final Jogador 3");
+                        exibirCenarioFinal(cenarioAtaqueJogador3);
+                        System.out.println("Cenario final Jogador 4");
+                        exibirCenarioFinal(cenarioAtaqueJogador4);
                         break;
                     }
 
@@ -169,6 +211,14 @@ public class BatalhaNaval{
                     Jogando(cenarioAtaqueJogador3, 3);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador3))){
                         System.out.println("Jogador 3 ganhou!");
+                        System.out.println("Cenario final Jogador 1");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        System.out.println("Cenario final Jogador 2");
+                        exibirCenarioFinal(cenarioAtaqueJogador2);
+                        System.out.println("Cenario final Jogador 3");
+                        exibirCenarioFinal(cenarioAtaqueJogador3);
+                        System.out.println("Cenario final Jogador 4");
+                        exibirCenarioFinal(cenarioAtaqueJogador4);
                         break;
                     }
 
@@ -177,6 +227,14 @@ public class BatalhaNaval{
                     Jogando(cenarioAtaqueJogador4, 4);
                     if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador4))){
                         System.out.println("Jogador 4 ganhou!");
+                        System.out.println("Cenario final Jogador 1");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        System.out.println("Cenario final Jogador 2");
+                        exibirCenarioFinal(cenarioAtaqueJogador2);
+                        System.out.println("Cenario final Jogador 3");
+                        exibirCenarioFinal(cenarioAtaqueJogador3);
+                        System.out.println("Cenario final Jogador 4");
+                        exibirCenarioFinal(cenarioAtaqueJogador4);
                         break;
                     }
                 }
@@ -197,7 +255,7 @@ public class BatalhaNaval{
 
             System.out.printf("Jogador %d\n", numeroDoJogador);
             System.out.println("Veja o campo do seu inimigo:");
-            exibirCenario(cenarioAtacar, true);
+            exibirCenario(cenarioAtacar, false);
             System.out.printf("Jogador %d indique a posicao que voce deseja atacar\n", numeroDoJogador);
             int ataqueJogador = scanner.nextInt();
 
@@ -542,6 +600,27 @@ public class BatalhaNaval{
         }
         return false;
 
+    }
+
+    public static void exibirCenarioFinal(char[][] cenarioFinal){
+        System.out.println("Cenario Final:");
+
+        for(int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                if(cenarioFinal[i][j] == '0'){
+                    cenarioFinal[i][j] = '~';
+                }
+            }
+        }
+        
+        for(int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                System.out.printf("%3s ", cenarioFinal[i][j]);
+                
+            }
+            System.out.println();
+        }
+        
     }
 
     
