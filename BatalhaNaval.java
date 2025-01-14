@@ -1,6 +1,5 @@
-// adicionar qtd de jogadores
+
 //adicionar mostrar tabelas finais
-//tratamento de entrada
 
 import java.util.Scanner;
 
