@@ -17,52 +17,177 @@ public class BatalhaNaval{
 
         while (running == 1){
             boolean jogoTerminado = false;
+            System.out.println("Bem vindo ao jogo Batalha Naval, escolha o que você quer fazer");
             System.out.println("1 - Jogar");
             System.out.println("2 - Sair");
             int valorDeEntrada = scanner.nextInt();
+            while(valorDeEntrada >2 || valorDeEntrada < 1){
+                System.out.println("Valor invalido, por favor insira um numero entre 1 e 2");
+                valorDeEntrada = scanner.nextInt();
+            }
             if (valorDeEntrada == 1){
-                System.out.println("Este jogo de batalha naval é para 2 jogares, os tiros serao alternados e iniciaram com os tiros do primeiro jogador");
-                System.out.println("O campo de batalhas terá números para indicar as posiçoes para o ataque");
-                System.out.println("Vao haver 5 embarcações de tamanho de 1 a 5, ganha quem afundar todas primeiro");
-                char[][] cenarioJogador1 = gerarCenarioAleatorio();
-                char[][] cenarioJogador2 = gerarCenarioAleatorio();
+                System.out.println("Insira a quantidade de jogadores (de 1 a 4 jogadores):");
+                int numeroDeJogadores = scanner.nextInt();
+                while(numeroDeJogadores < 1 || numeroDeJogadores>4){
+                    System.out.println("Valor invalido, por favor insira um numero entre 1 e 4");
+                    numeroDeJogadores = scanner.nextInt();
+                }
+
+                rodarJogoPara(numeroDeJogadores);
+                
+                
+
+            
+                
+            
+            
+                }else if(valorDeEntrada == 2){
+                running = 2;
+
+            }
+        }
+        
+        }
+    
+
+    public static void rodarJogoPara(int numeroDeJogadores){
+
+
+        if (numeroDeJogadores == 1){
+
+            System.out.println("Voce escolheu o jogo para uma pessoa apenas");
+            System.out.println("O campo de batalhas terá números para indicar as posiçoes para o ataque");
+            System.out.println("Haverao 5 embarcações de tamanho de 1 a 5, voce vence assim que afundar todas");
+                char[][] cenarioAtaqueJogador1 = gerarCenarioAleatorio();
 
                 while(true){
 
 
                     System.out.println("-------------------------------------------------------------------------------------------------");
                    
-                    Jogador1(cenarioJogador2);
-                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioJogador2))){
+                    Jogando(cenarioAtaqueJogador1, 1);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador1))){
+                        System.out.println("Jogador 1 ganhou!");
+                        break;
+                    }
+                }
+
+        }else if(numeroDeJogadores == 2){
+            System.out.println("Voce escolheu o jogo para duas pessoa apenas.");
+            System.out.println("Vocês atacarao alternadamente");
+            System.out.println("O campo de batalhas terá números para indicar as posiçoes para o ataque");
+            System.out.println("Haverao 5 embarcações em cada cenário de tamanho de 1 a 5, ganha quem afundar todas primeiro");
+                char[][] cenarioAtaqueJogador1 = gerarCenarioAleatorio();
+                char[][] cenarioAtaqueJogador2 = gerarCenarioAleatorio();
+
+                while(true){
+
+
+                    System.out.println("-------------------------------------------------------------------------------------------------");
+                   
+                    Jogando(cenarioAtaqueJogador1, 1);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador1))){
                         System.out.println("Jogador 1 ganhou!");
                         break;
                     }
 
                     System.out.println("------------------------------------------------------------------------------------------------");
                     
-                    Jogador2(cenarioJogador1);
-                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioJogador1))){
-                        
+                    Jogando(cenarioAtaqueJogador2, 2);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador2))){
+                        System.out.println("Jogador 2 ganhou!");
+                        break;
+                    }
+                }
+        }else if(numeroDeJogadores == 3){
+            System.out.println("Voce escolheu o jogo para tres pessoa apenas.");
+            System.out.println("Vocês atacarao alternadamente");
+            System.out.println("O campo de batalhas terá números para indicar as posiçoes para o ataque");
+            System.out.println("Haverao embarcações em cada cenário de tamanho de 1 a 5, ganha quem afundar todas primeiro");
+                char[][] cenarioAtaqueJogador1 = gerarCenarioAleatorio();
+                char[][] cenarioAtaqueJogador2 = gerarCenarioAleatorio();
+                char[][] cenarioAtaqueJogador3 = gerarCenarioAleatorio();
+
+                while(true){
+
+
+                    System.out.println("-------------------------------------------------------------------------------------------------");
+                   
+                    Jogando(cenarioAtaqueJogador1, 1);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador1))){
+                        System.out.println("Jogador 1 ganhou!");
+                        break;
+                    }
+
+                    System.out.println("------------------------------------------------------------------------------------------------");
+                    
+                    Jogando(cenarioAtaqueJogador2, 2);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador2))){
                         System.out.println("Jogador 2 ganhou!");
                         break;
                     }
 
+                    System.out.println("------------------------------------------------------------------------------------------------");
                     
-
-            
-                
-            
-            
+                    Jogando(cenarioAtaqueJogador3, 3);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador3))){
+                        System.out.println("Jogador 3 ganhou!");
+                        break;
+                    }
                 }
-            }else if(valorDeEntrada == 2){
-                running = 2;
+            
+        }else if(numeroDeJogadores == 4){
+            System.out.println("Voce escolheu o jogo para quatro pessoa apenas.");
+            System.out.println("Vocês atacarao alternadamente");
+            System.out.println("O campo de batalhas terá números para indicar as posiçoes para o ataque");
+            System.out.println("Haverao 5 embarcações em cada cenário de tamanho de 1 a 5, ganha quem afundar todas primeiro");
+                char[][] cenarioAtaqueJogador1 = gerarCenarioAleatorio();
+                char[][] cenarioAtaqueJogador2 = gerarCenarioAleatorio();
+                char[][] cenarioAtaqueJogador3 = gerarCenarioAleatorio();
+                char[][] cenarioAtaqueJogador4 = gerarCenarioAleatorio();
 
-            }
+                while(true){
+
+
+                    System.out.println("-------------------------------------------------------------------------------------------------");
+                   
+                    Jogando(cenarioAtaqueJogador1, 1);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador1))){
+                        System.out.println("Jogador 1 ganhou!");
+                        break;
+                    }
+
+                    System.out.println("------------------------------------------------------------------------------------------------");
+                    
+                    Jogando(cenarioAtaqueJogador2, 2);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador2))){
+                        System.out.println("Jogador 2 ganhou!");
+                        break;
+                    }
+
+                    System.out.println("------------------------------------------------------------------------------------------------");
+                    
+                    Jogando(cenarioAtaqueJogador3, 3);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador3))){
+                        System.out.println("Jogador 3 ganhou!");
+                        break;
+                    }
+
+                    System.out.println("------------------------------------------------------------------------------------------------");
+                    
+                    Jogando(cenarioAtaqueJogador4, 4);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador4))){
+                        System.out.println("Jogador 4 ganhou!");
+                        break;
+                    }
+                }
         }
+
+
     }
         
 
-    public static void Jogador1(char[][] cenarioJogador2) {
+    public static void Jogando(char[][] cenarioAtacar, int numeroDoJogador) {
         Scanner scanner = new Scanner(System.in);
         boolean running = false;
         char auxiliar;
@@ -71,24 +196,24 @@ public class BatalhaNaval{
 
         while(running == false){
 
-            System.out.println("Jogador 1");
+            System.out.printf("Jogador %d\n", numeroDoJogador);
             System.out.println("Veja o campo do seu inimigo:");
-            exibirCenario(cenarioJogador2, true);
-            System.out.println("Jogador 1 indique a posicao que voce deseja atacar");
-            int ataqueJogador1 = scanner.nextInt();
+            exibirCenario(cenarioAtacar, true);
+            System.out.printf("Jogador %d indique a posicao que voce deseja atacar\n", numeroDoJogador);
+            int ataqueJogador = scanner.nextInt();
 
-            if(verificarAtaqueRepetido(cenarioJogador2, ataqueJogador1) == true){
+            if(verificarAtaqueRepetido(cenarioAtacar, ataqueJogador) == true){
                 System.out.println("Ataque já realizado nessa posicao. Tente outra.");
                 running = false;
             }else{
-                boolean acertou = realizarAtaque(cenarioJogador2, ataqueJogador1);
+                boolean acertou = realizarAtaque(cenarioAtacar, ataqueJogador);
                 if(acertou == true){
-                    auxiliar = cenarioJogador2[tradutorLinha(ataqueJogador1)][tradutorColuna(ataqueJogador1)];
-                    atualizarCenario(cenarioJogador2, ataqueJogador1, acertou);
-                    verificarEmbarcacaoAfundada(cenarioJogador2, auxiliar);
+                    auxiliar = cenarioAtacar[tradutorLinha(ataqueJogador)][tradutorColuna(ataqueJogador)];
+                    atualizarCenario(cenarioAtacar, ataqueJogador, acertou);
+                    verificarEmbarcacaoAfundada(cenarioAtacar, auxiliar);
                     running = true;
                 }else{
-                    atualizarCenario(cenarioJogador2, ataqueJogador1, acertou);
+                    atualizarCenario(cenarioAtacar, ataqueJogador, acertou);
                     running = true;
                 }
             }
@@ -100,39 +225,7 @@ public class BatalhaNaval{
 
     }
 
-    public static void Jogador2(char[][] cenarioJogador1) {
-        Scanner scanner = new Scanner(System.in);
-        boolean running = false;
-        char auxiliar;
 
-        while(running == false){
-            System.out.println("Jogador 2");
-            System.out.println("Veja o campo do seu inimigo:");
-            exibirCenario(cenarioJogador1, true);
-            System.out.println("Jogador 2 indique a posicao que voce deseja atacar");
-            int ataqueJogador2 = scanner.nextInt();
-
-            if(verificarAtaqueRepetido(cenarioJogador1, ataqueJogador2) == true){
-                System.out.println("Ataque já realizado nessa posicao. Tente outra.");
-                running = false;
-            }else{
-                boolean acertou = realizarAtaque(cenarioJogador1, ataqueJogador2);
-                if(acertou == true){
-                    auxiliar = cenarioJogador1[tradutorLinha(ataqueJogador2)][tradutorColuna(ataqueJogador2)];
-                    atualizarCenario(cenarioJogador1, ataqueJogador2, acertou);
-                    verificarEmbarcacaoAfundada(cenarioJogador1, auxiliar);
-                    running = true;
-                }else{
-                    atualizarCenario(cenarioJogador1, ataqueJogador2, acertou);
-                    running = true;
-            }
-            }
-            
-        }
-
-        
-
-    }
 
 
     public static char[][] gerarCenarioAleatorio(){
