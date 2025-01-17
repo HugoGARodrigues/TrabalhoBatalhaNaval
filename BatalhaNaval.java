@@ -49,14 +49,48 @@ public class BatalhaNaval{
     
 
     public static void rodarJogoPara(int numeroDeJogadores){
+        Scanner scanner = new Scanner(System.in);
 
 
         if (numeroDeJogadores == 1){
 
-            System.out.println("Voce escolheu o jogo para uma pessoa apenas");
-            System.out.println("O campo de batalhas terá números para indicar as posiçoes para o ataque");
-            System.out.println("Haverao 5 embarcações de tamanho de 1 a 5, voce vence assim que afundar todas");
+            System.out.println("Voce escolheu o jogo para uma pessoa apenas você gostaria de apenas atacar um campo afim de afundar todos os navios ou jogar contra uma IA?");
+            System.out.println("1 - Jogar sozinho \n 2 - Jogar contra IA");
+            int jogarContraAi = scanner.nextInt();
+
+            while(jogarContraAi > 2 || jogarContraAi < 1){
+                System.out.println("Valor invalido, por favor insira um numero entre 1 e 2");
+                jogarContraAi = scanner.nextInt();
+            }
+
+            if(jogarContraAi == 1){
+
+                System.out.println("Voce escolheu o jogo para uma pessoa apenas");
+                System.out.println("O campo de batalhas terá números para indicar as posiçoes para o ataque");
+                System.out.println("Haverao 5 embarcações de tamanho de 1 a 5, voce vence assim que afundar todas");
                 char[][] cenarioAtaqueJogador1 = gerarCenarioAleatorio();
+
+                while(true){
+
+
+                    System.out.println("-------------------------------------------------------------------------------------------------");
+                    
+                    Jogando(cenarioAtaqueJogador1, 1);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogador1))){
+                        System.out.println("Jogador 1 ganhou!");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        break;
+                    }
+                }
+
+            }else{
+
+                System.out.println("Voce escolheu o jogar contra uma IA");
+                System.out.println("O campo de batalhas terá números para indicar as posiçoes para o ataque");
+                System.out.println("Voce e a IA vao atirar de maneira alternada");
+                System.out.println("Haverao 5 embarcações de tamanho de 1 a 5, voce vence assim que voce ou a IA afundarem todas");
+                char[][] cenarioAtaqueJogador1 = gerarCenarioAleatorio();
+                char[][] cenarioAtaqueJogadorAi = gerarCenarioAleatorio();
 
                 while(true){
 
@@ -69,7 +103,20 @@ public class BatalhaNaval{
                         exibirCenarioFinal(cenarioAtaqueJogador1);
                         break;
                     }
+
+                    System.out.println("-------------------------------------------------------------------------------------------------");
+                    AiJogando(cenarioAtaqueJogadorAi);
+                    if(verificarVitoria(contarEmbarcacoesAfundadas(cenarioAtaqueJogadorAi))){
+                        System.out.println("A maquina ganhou!");
+                        exibirCenarioFinal(cenarioAtaqueJogador1);
+                        exibirCenarioFinal(cenarioAtaqueJogadorAi);
+                        break;
+                    }
                 }
+
+            }
+
+            
 
         }else if(numeroDeJogadores == 2){
             System.out.println("Voce escolheu o jogo para duas pessoa apenas.");
@@ -621,6 +668,49 @@ public class BatalhaNaval{
             System.out.println();
         }
         
+    }
+
+    public static void AiJogando(char[][] cenarioAtacar) {
+        boolean running = false;
+        char auxiliar;
+        boolean bomba = false;
+        int numeroBomba = 0;
+
+       
+
+        while(running == false){
+            int ataqueMaquina = gerandoNumeroAleatorioInteiro(1,100);
+            exibirCenario(cenarioAtacar, true);
+            System.out.printf("A Máquina atacará a posicao %d \n", ataqueMaquina);
+
+            while(ataqueMaquina <=0 || ataqueMaquina > 100){
+                System.out.println("Posicao invalida. Tente novamente.");
+                ataqueMaquina = gerandoNumeroAleatorioInteiro(1,100);
+            }
+
+            if(verificarAtaqueRepetido(cenarioAtacar, ataqueMaquina) == true){
+                System.out.println("Ataque já realizado nessa posicao. Tente outra.");
+                running = false;
+            }else{
+                boolean acertou = realizarAtaque(cenarioAtacar, ataqueMaquina);
+                if(acertou == true){
+                    auxiliar = cenarioAtacar[tradutorLinha(ataqueMaquina)][tradutorColuna(ataqueMaquina)];
+                    atualizarCenario(cenarioAtacar, ataqueMaquina, acertou);
+                    verificarEmbarcacaoAfundada(cenarioAtacar, auxiliar);
+                    running = true;
+                    bomba = true;
+                    numeroBomba = ataqueMaquina;
+                }else{
+                    atualizarCenario(cenarioAtacar, ataqueMaquina, acertou);
+                    running = true;
+                }
+            }
+            
+        }
+        
+
+        
+
     }
 
     
